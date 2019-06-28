@@ -8,6 +8,24 @@ void initMorse () {
     printf("Init program \n");
 }
 
+char pesquisaR(Arvore *a, char *chave, int p) {
+    if (p == NULL) { return NULL; }
+    
+    if (a->esq == NULL && a->dir == NULL) {
+        if (!strcmp(a->registro->chave, chave)) {
+            char letra = a->registro->letra;
+            return letra;
+        }
+        else { return NULL; }
+    }
+
+    if (!strcmp(chave[p], '.')) {
+        return pesquisaR(a->esq, chave, p + 1);
+    } else {
+        return pesquisaR(a->dir, chave, p + 1);
+    }
+}
+
 // A ..-.
 // B -...
 // C -.-.
