@@ -16,15 +16,15 @@ typedef struct no Arvore;
 // #1:
 void initMorse ();
 // #2:
-Arvore *criaNo(Chave *reg);
+Arvore *criaNo (Chave *reg);
 // #3:
-Arvore *CriaArvore();
+Arvore *CriaArvore ();
 // #4:
-void LiberaArvore(Arvore *a);
+void LiberaArvore (Arvore *a);
 // #5:
-void imprimeArvore(Arvore *a);
+void imprimeArvore (Arvore *a);
 // #6:
-char pesquisaR(Arvore *a, char *chave, int p);
+char pesquisaR (Arvore *a, char *chave, int p);
 // #7:
 Arvore *insereR (Arvore *a, Chave *reg, int p);
 // #8:

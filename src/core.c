@@ -8,7 +8,7 @@ void initMorse () {
     printf("Init program \n");
 }
 
-Arvore *criaNo(Chave *reg) {
+Arvore *criaNo (Chave *reg) {
     Arvore *nova = (Arvore*) malloc(sizeof(Arvore));
     nova->registro = reg;
     //setting left and right Arvores to NULL to prevent errors
@@ -17,7 +17,7 @@ Arvore *criaNo(Chave *reg) {
     return nova;
 }
 
-Arvore *CriaArvore() { 
+Arvore *CriaArvore () { 
     Arvore *nova = (Arvore*) malloc(sizeof(Arvore));
     nova->registro->letra = '!';
     nova->esq = NULL;
@@ -25,7 +25,7 @@ Arvore *CriaArvore() {
     return nova;
 }
 
-void LiberaArvore(Arvore *a) {
+void LiberaArvore (Arvore *a) {
     if(a != NULL) {
         LiberaArvore(a->esq);
         LiberaArvore(a->dir);
@@ -33,7 +33,7 @@ void LiberaArvore(Arvore *a) {
     }
 }
 
-void imprimeArvore(Arvore *a) {
+void imprimeArvore (Arvore *a) {
     if(a != NULL) {
         if(a->registro->letra != '!') {
             printf("%c %s\n", a->registro->letra, a->registro->chave);
@@ -43,7 +43,7 @@ void imprimeArvore(Arvore *a) {
     }
 }
 
-char pesquisaR(Arvore *a, char *chave, int p) {
+char pesquisaR (Arvore *a, char *chave, int p) {
     if (p == NULL) { return NULL; }
     
     if (a->esq == NULL && a->dir == NULL) {
