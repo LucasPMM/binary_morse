@@ -13,16 +13,16 @@ void FFVazia (Fila *f) {
     f->inicio->prox = NULL;
 }
 
-int vazia (Fila *f) { return (f->inicio == f->fim); }
+int Vazia (Fila *f) { return (f->inicio == f->fim); }
 
-void insereFila (Fila *f, char morse[]) {
+void InsereFila (Fila *f, char morse[]) {
 	f->fim->prox = (Item*) malloc(sizeof(Item));
 	f->fim = f->fim->prox;
 	strcpy(f->fim->morse, morse);
 	f->fim->prox = NULL;
 }
 
-void liberaFile (Fila *q) {
+void LiberaFile (Fila *q) {
     Item *p = q->inicio;
     while (p != NULL) {
         q->inicio = p->prox;
@@ -31,7 +31,7 @@ void liberaFile (Fila *q) {
     }
 }
 
-void imprimeFila (Fila *f) {
+void ImprimeFila (Fila *f) {
     Item *p = f->inicio->prox;
     while (p != NULL) {
         printf("%s\n", p->morse);

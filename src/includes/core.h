@@ -14,18 +14,18 @@ struct no {
 typedef struct no Arvore;
 
 // #1:
-void initMorse (int imprimir);
+void InitMorse (int imprimir);
 // #2:
-Arvore *criaNo (Chave *reg);
+Arvore *CriaNo (Chave *reg);
 // #3:
 Arvore *CriaArvore ();
 // #4:
 void LiberaArvore (Arvore *a);
 // #5:
-void imprimeArvore (Arvore *a);
+void ImprimeArvore (Arvore *a);
 // #6:
-char pesquisaR (Arvore *a, char *chave, int p);
+char PesquisaR (Arvore *a, char *chave, int p);
 // #7:
-Arvore *insereR (Arvore *a, Chave *reg, int p);
+Arvore *InsereR (Arvore *a, Chave *reg, int p);
 // #8:
-void insere (Arvore **a, Chave *reg);
+void Insere (Arvore **a, Chave *reg);

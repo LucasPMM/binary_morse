@@ -14,10 +14,10 @@ typedef struct fila Fila;
 // #1:
 void FFVazia (Fila *f);
 // #2:
-int vazia (Fila *f);
+int Vazia (Fila *f);
 // #3:
-void insereFila (Fila *f, char morse[]);
+void InsereFila (Fila *f, char morse[]);
 // #4:
-void liberaFile (Fila *q);
+void LiberaFile (Fila *q);
 // #5:
-void imprimeFila (Fila *f);
+void ImprimeFila (Fila *f);

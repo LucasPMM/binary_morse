@@ -6,7 +6,7 @@
 
 int main(int argc, char const *argv[]) {
     if(argc == 2 && !strcmp(argv[1], "-a")) {
-		initMorse(1);
-	} else { initMorse(0); }
+		InitMorse(1);
+	} else { InitMorse(0); }
 	return 0; 
 }
