@@ -13,6 +13,19 @@ struct no {
 
 typedef struct no Arvore;
 
-// Função que inicia o programa
 // #1:
 void initMorse ();
+// #2:
+Arvore *criaNo(Chave *reg);
+// #3:
+Arvore *CriaArvore();
+// #4:
+void LiberaArvore(Arvore *a);
+// #5:
+void imprimeArvore(Arvore *a);
+// #6:
+char pesquisaR(Arvore *a, char *chave, int p);
+// #7:
+Arvore *insereR (Arvore *a, Chave *reg, int p);
+// #8:
+void insere (Arvore **a, Chave *reg);
