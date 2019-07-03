@@ -8,15 +8,15 @@ Implementação de filas baseada nos slides da materia.
  */
 
 void FFVazia (Fila *f) {
-	f->inicio = (Fila*) malloc(sizeof(Fila));
+	f->inicio = (Item*) malloc(sizeof(Item));
 	f->fim = f->inicio;
     f->inicio->prox = NULL;
 }
 
 int vazia (Fila *f) { return (f->inicio == f->fim); }
 
-void insere (Fila *f, char morse[]) {
-	f->fim->prox = (Fila*) malloc(sizeof(Fila));
+void insereFila (Fila *f, char morse[]) {
+	f->fim->prox = (Item*) malloc(sizeof(Item));
 	f->fim = f->fim->prox;
 	strcpy(f->fim->morse, morse);
 	f->fim->prox = NULL;

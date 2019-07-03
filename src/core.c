@@ -2,16 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "includes/core.h"
+#include "includes/fila.h"
 
-// Função 'cabeça' do programa:
-void initMorse () {
-    printf("Init program \n");
+void initMorse (int imprimir) {
+    printf("Init program %d\n", imprimir);
 }
 
 Arvore *criaNo (Chave *reg) {
     Arvore *nova = (Arvore*) malloc(sizeof(Arvore));
     nova->registro = reg;
-    //setting left and right Arvores to NULL to prevent errors
     nova->esq = NULL;
     nova->dir = NULL;
     return nova;
@@ -44,17 +43,15 @@ void imprimeArvore (Arvore *a) {
 }
 
 char pesquisaR (Arvore *a, char *chave, int p) {
-    if (p == NULL) { return NULL; }
-    
     if (a->esq == NULL && a->dir == NULL) {
         if (!strcmp(a->registro->chave, chave)) {
             char letra = a->registro->letra;
             return letra;
         }
-        else { return NULL; }
+        else { return '!'; }
     }
 
-    if (!strcmp(chave[p], '.')) {
+    if (chave[p] == '.') {
         return pesquisaR(a->esq, chave, p + 1);
     } else {
         return pesquisaR(a->dir, chave, p + 1);
@@ -63,7 +60,7 @@ char pesquisaR (Arvore *a, char *chave, int p) {
 
 Arvore *insereR (Arvore *a, Chave *reg, int p) {
     char chave[10];
-    strcopy(chave, reg->chave);
+    strcpy(chave, reg->chave);
 
     if (strlen(chave) == p) {
         if (a == NULL) { return criaNo(reg); }
@@ -72,8 +69,8 @@ Arvore *insereR (Arvore *a, Chave *reg, int p) {
             return a;
         }
     }
-    if (a == NULL) { a = criaArvore(); }
-    if (!strcmp(chave[p], '.')) {
+    if (a == NULL) { a = CriaArvore(); }
+    if (chave[p] == '.') {
         a->esq = insereR(a->esq, reg, p+1);
     }
     else {

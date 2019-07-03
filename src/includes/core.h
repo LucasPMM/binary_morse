@@ -14,7 +14,7 @@ struct no {
 typedef struct no Arvore;
 
 // #1:
-void initMorse ();
+void initMorse (int imprimir);
 // #2:
 Arvore *criaNo (Chave *reg);
 // #3:
