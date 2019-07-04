@@ -3,12 +3,18 @@
 #include <string.h>
 #include "includes/core.h"
 
+#define MORSE_TAM 10
+#define LINHA_TAM 200
+#define VAZIO '!'
+
 void InitMorse (int imprimir) {
-    int i;
-    char letra, *entrada, morse[10], linhaMorse[200], linhaAlfanumerica[200];
+    int i = 0;
+    char letra, *entrada, morse[MORSE_TAM], linhaMorse[LINHA_TAM], linhaAlfanumerica[LINHA_TAM], *codigoMorse;
+    
     Arvore arvore = CriaArvore();
-    FILE *morseTxt = fopen("morse.txt", "r");;
     Chave chave;
+
+    FILE *morseTxt = fopen("morse.txt", "r");;
     while(fscanf(morseTxt, " %c %s", &letra, morse) != EOF) {
         strcpy(chave.chave, morse);
         chave.letra = letra;
@@ -16,9 +22,7 @@ void InitMorse (int imprimir) {
     }
     fclose(morseTxt);
 
-    char *codigoMorse;
-    while (fgets(linhaMorse, 200, stdin) != NULL) {
-        i = 0;
+    while (fgets(linhaMorse, LINHA_TAM, stdin) != NULL) {
         if(linhaMorse[strlen(linhaMorse)-1] == '\n') {
             linhaMorse[strlen(linhaMorse)-1] = '\0';
         }
@@ -35,11 +39,12 @@ void InitMorse (int imprimir) {
         }
         linhaAlfanumerica[i] = '\0';
         printf("%s\n", linhaAlfanumerica);
-        // armazenar as linhaAlfanumerica em um vetor...
+        // Seria possível armazenar todas as linhas em um vetor para printar somente no final
     }
 
-    if(imprimir)
+    if (imprimir) {
         ImprimeArvore(arvore);
+    }
 
     LiberaArvore(arvore);
 }
@@ -54,7 +59,7 @@ Apontador CriaNo (Chave reg) {
 
 Apontador CriaArvore () { 
     Apontador nova = (Apontador) malloc(sizeof(No));
-    nova->registro.letra = '!';
+    nova->registro.letra = VAZIO;
     nova->esq = NULL;
     nova->dir = NULL;
     return nova;
@@ -70,7 +75,7 @@ void LiberaArvore (Apontador a) {
 
 void ImprimeArvore (Apontador a) {
     if(a != NULL) {
-        if(a->registro.letra != '!') {
+        if(a->registro.letra != VAZIO) {
             printf("%c %s\n", a->registro.letra, a->registro.chave);
         }
         ImprimeArvore(a->esq);
@@ -97,7 +102,7 @@ Apontador Pesquisa (Apontador a, char *chave) {
 }
 
 Arvore InsereR (Arvore a, Chave reg, int p) {
-    char chave[10];
+    char chave[MORSE_TAM];
     strcpy(chave, reg.chave);
 
     if (strlen(chave) == p) {
