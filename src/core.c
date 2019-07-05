@@ -10,7 +10,7 @@
 #define VAZIO '!'
 
 void InitMorse (int imprimir) {
-    int i = 0;
+    int i = 0, firstExecution = 1;
     char letra, *entrada, morse[MORSE_TAM], linhaMorse[LINHA_TAM], linhaAlfanumerica[LINHA_TAM], *codigoMorse;
     
     Arvore arvore = CriaArvore();
@@ -27,6 +27,11 @@ void InitMorse (int imprimir) {
 
     // Traduzir cada codigo morse em uma letra até o final do arquivo
     while (fgets(linhaMorse, LINHA_TAM, stdin) != NULL) {
+        if (!firstExecution) {
+            printf("\n");
+        }
+        firstExecution = 0;
+
         // Remover o '\n' no final da string e marcar como o final
         if(linhaMorse[strlen(linhaMorse)-1] == '\n') {
             linhaMorse[strlen(linhaMorse)-1] = '\0';
@@ -45,7 +50,7 @@ void InitMorse (int imprimir) {
         // Marcar o fim da string
         linhaAlfanumerica[i] = '\0';
         i = 0;
-        printf("%s\n", linhaAlfanumerica);
+        printf("%s", linhaAlfanumerica);
         // Seria possível armazenar todas as linhas em um vetor para printar somente no final
     }
 
