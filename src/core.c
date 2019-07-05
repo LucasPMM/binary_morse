@@ -3,8 +3,10 @@
 #include <string.h>
 #include "includes/core.h"
 
+// Uma possível melhora seria implementar o realloc para evitar esses valores não dinâmicos
 #define MORSE_TAM 10
-#define LINHA_TAM 200
+#define LINHA_TAM 500
+#define MORSE_FILE "morse.txt"
 #define VAZIO '!'
 
 void InitMorse (int imprimir) {
@@ -14,7 +16,8 @@ void InitMorse (int imprimir) {
     Arvore arvore = CriaArvore();
     Chave chave;
 
-    FILE *morseTxt = fopen("morse.txt", "r");;
+    // Montar a árvore com os dados do arquivo
+    FILE *morseTxt = fopen(MORSE_FILE, "r");;
     while(fscanf(morseTxt, " %c %s", &letra, morse) != EOF) {
         strcpy(chave.chave, morse);
         chave.letra = letra;
@@ -22,29 +25,32 @@ void InitMorse (int imprimir) {
     }
     fclose(morseTxt);
 
+    // Traduzir cada codigo morse em uma letra até o final do arquivo
     while (fgets(linhaMorse, LINHA_TAM, stdin) != NULL) {
+        // Remover o '\n' no final da string e marcar como o final
         if(linhaMorse[strlen(linhaMorse)-1] == '\n') {
             linhaMorse[strlen(linhaMorse)-1] = '\0';
         }
+        // Similar ao split do javascript: separar em uma string até a ocorrência de um caracter
         codigoMorse = strtok(linhaMorse, " ");
         while (codigoMorse != NULL) {
-            if(!strcmp(codigoMorse, "/")) {
+            if(!strcmp(codigoMorse, "/")) { // Caso o caracter for '/' adicionar um espaço
                 linhaAlfanumerica[i] = ' ';
-            }
-            else {
+            } else { // Caso contrário pesquisar na árvore
                 linhaAlfanumerica[i] = Pesquisa(arvore, codigoMorse)->registro.letra;
             }
             codigoMorse = strtok(NULL, " ");
             i++;
         }
+        // Marcar o fim da string
         linhaAlfanumerica[i] = '\0';
+        i = 0;
         printf("%s\n", linhaAlfanumerica);
         // Seria possível armazenar todas as linhas em um vetor para printar somente no final
     }
 
-    if (imprimir) {
-        ImprimeArvore(arvore);
-    }
+    // Imprimir a árvore caso o parâmetro '-a' seja inserido
+    if (imprimir) { ImprimeArvore(arvore); }
 
     LiberaArvore(arvore);
 }
@@ -55,6 +61,7 @@ Apontador CriaNo (Chave reg) {
     nova->esq = NULL;
     nova->dir = NULL;
     return nova;
+    // Implementação baseada nos slides da matéria;
 }
 
 Apontador CriaArvore () { 
@@ -63,6 +70,7 @@ Apontador CriaArvore () {
     nova->esq = NULL;
     nova->dir = NULL;
     return nova;
+    // Implementação baseada nos slides da matéria;
 }
 
 void LiberaArvore (Apontador a) {
@@ -90,15 +98,17 @@ Apontador PesquisaR (Apontador a, char *chave, int p) {
         else { return NULL; }
     }
 
-    if (chave[p] == '.') {
+    if (chave[p] == '.') { // caso o caracter seja '.' inserir na sub-árvore da esquerda
         return PesquisaR(a->esq, chave, p + 1);
-    } else {
+    } else { // caso o caracter seja '-' inserir na sub-árvore da direita
         return PesquisaR(a->dir, chave, p + 1);
     }
+    // Implementação baseada nos slides da matéria;
 }
 
 Apontador Pesquisa (Apontador a, char *chave) {
     return PesquisaR(a, chave, 0);
+    // Implementação baseada nos slides da matéria;
 }
 
 Arvore InsereR (Arvore a, Chave reg, int p) {
@@ -120,9 +130,11 @@ Arvore InsereR (Arvore a, Chave reg, int p) {
         a->dir = InsereR(a->dir, reg, p+1);
     }
     return a;
+    // Implementação baseada nos slides da matéria;
 }
 
 
 void Insere (Arvore *a, Chave reg) {
     *a = InsereR(*a, reg, 0);
+    // Implementação baseada nos slides da matéria;
 }

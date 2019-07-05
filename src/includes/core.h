@@ -13,6 +13,8 @@ typedef struct no {
 
 typedef Apontador Arvore;
 
+// Implementação da estrutura de dados baseada nos slides da matéria.
+
 // #1:
 void InitMorse (int imprimir);
 // #2:
